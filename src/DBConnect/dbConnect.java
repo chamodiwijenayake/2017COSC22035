@@ -4,7 +4,7 @@ public class dbConnect {
         //public String url = "localhost";
         public String url = "172.16.20.180";
         public String port = "3306"; //8889
-        public String database = "test";
+        public String database = "hacklnjava";
         public String user = "admin";
         public String password = "stcs";//root
         public String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -16,7 +16,7 @@ public class dbConnect {
             String DB_URL = "jdbc:mysql://"+url+":"+port+"/"+database;
             Statement dbstmt=null;
             try {
-                conn = DriverManager.getConnection(DB_URL,user,password);//Connect
+                conn = DriverManager.getConnection(DB_URL,user,password);//Connect(same to all)
                 //dbstmt = conn.createStatement();
                 System.out.println("Connected");
             }
@@ -28,7 +28,7 @@ public class dbConnect {
         }
 
 
-    public Statement Conn2DB()
+    public Statement Conn2DB()//(oblect to handle statements)
     {
         String DB_URL = "jdbc:mysql://"+url+":"+port+"/"+database;
         Statement dbstmt=null;
@@ -44,4 +44,13 @@ public class dbConnect {
         return dbstmt;
     }
 
+
+public void closeDB(){
+    try{
+        conn.close();
+    }
+    catch(SQLException se){
+        se.printStackTrace();
+    }
+}
 }

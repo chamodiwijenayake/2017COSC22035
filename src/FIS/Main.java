@@ -7,8 +7,26 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Statement abc=null;
         Statement stml = null;
 
+        DBConnect.dbConnect AB =new dbConnect();
+        abc = AB.Conn2DB();
+        String aaa="SELECT * FROM userdetails";
+        String insertquery="INSERT INTO 'userdetails'('userID',USERName')"
+        try{
+           // abc.executeUpdate(insertquery);
+           ResultSet rs= abc.executeQuery(aaa);
+            while(rs.next()){
+                int uID=rs.getInt("UserID");
+                String pw=rs.getString( "Password");
+                System.out.println("User ID from DB"+uID+"Password"+pw);
+            }
+        }
+        catch(SQLException se){
+            se.printStackTrace();
+        }
+        AB.closeDB();
         DBConnect.dbConnect DB = new dbConnect();//Object from DB connect
         DB.Connect2DB();//Connect to DB
 
